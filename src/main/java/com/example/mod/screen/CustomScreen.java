@@ -1,10 +1,10 @@
 package com.example.mod.screen;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class CustomScreen extends Screen {
 
@@ -20,27 +20,28 @@ public class CustomScreen extends Screen {
         ButtonWidget button = ButtonWidget.builder(
             Text.literal("Hello World"),
             btn -> {
-                this.minecraft.getToastManager().addToast(
-                    SystemToast.multiline(this.minecraft,
+                this.client.getToastManager().addToast(
+                    SystemToast.multiline(this.client,
                         SystemToast.SystemToastId.NARRATOR_TOGGLE,
                         Text.literal("Hello World!"),
                         Text.literal("This is a toast."))
                 );
             })
-            .bounds(centerX - 60, centerY - 10, 120, 20)
+            .position(centerX - 60, centerY - 10)
+            .size(120, 20)
             .build();
 
-        this.addRenderableWidget(button);
+        this.addDrawableChild(button);
     }
 
     @Override
-    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
-        super.extractRenderState(graphics, mouseX, mouseY, delta);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context, mouseX, mouseY, delta);
 
-        graphics.text(this.font,
+        context.drawCenteredTextWithShadow(this.textRenderer,
             Text.literal("Special Button"),
-            this.width / 2, 40,
-            0xFFFFFFFF,
-            true);
+            this.width / 2, 40, 0xFFFFFFFF);
+
+        super.render(context, mouseX, mouseY, delta);
     }
 }
