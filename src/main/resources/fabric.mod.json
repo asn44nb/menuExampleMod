@@ -14,25 +14,21 @@
 	"license": "CC0-1.0",
 	"icon": "assets/modid/icon.png",
 	"environment": "*",
-	"entrypoints": {{
-  "main": [
-    "com.example.ExampleMod"
+	"entrypoints": {
+    "main": [
+      "com.example.ExampleMod"
+    ],
+    "client": [
+      "com.example.client.ExampleModClient"
+    ]
+  },
+  "mixins": [
+    "modid.mixins.json"
   ],
-  "client": [
-    "com.example.client.ExampleModClient"
-  ]
-},
-	"mixins": [
-		"modid.mixins.json",
-		{
-			"config": "modid.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
-		"fabricloader": ">=0.19.2",
-		"minecraft": "~26.1.2",
-		"java": ">=25",
-		"fabric-api": "*"
-	}
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~26.1.2",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
 }
