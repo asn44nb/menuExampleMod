@@ -15,7 +15,8 @@ public class ExampleModClient implements ClientModInitializer {
             dispatcher.register(
                 ClientCommandManager.literal("menü")
                     .executes(context -> {
-                        MinecraftClient.getInstance().setScreen(new CustomScreen());
+                        MinecraftClient client = MinecraftClient.getInstance();
+                        client.execute(() -> client.setScreen(new CustomScreen()));
                         return 1;
                     })
             );
@@ -23,7 +24,8 @@ public class ExampleModClient implements ClientModInitializer {
             dispatcher.register(
                 ClientCommandManager.literal("custommenu")
                     .executes(context -> {
-                        MinecraftClient.getInstance().setScreen(new CustomScreen());
+                        MinecraftClient client = MinecraftClient.getInstance();
+                        client.execute(() -> client.setScreen(new CustomScreen()));
                         return 1;
                     })
             );
